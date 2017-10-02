@@ -7,7 +7,8 @@ import (
 	"github.com/astaxie/beego/logs"
 
   . "github.com/cuu/select_tags/controllers"
-	
+	 "github.com/cuu/select_tags/database"
+
 	"fmt"
 	"flag"
 	"errors"
@@ -17,12 +18,8 @@ import (
 )
 
 
-func init_database() {
-	fmt.Println("create table in database defined")
-}
-
 func init() {
-	
+
 }
 
 func print_help() {
@@ -98,7 +95,6 @@ func run_beego(){
 
 func main() {
 
-	initdb := flag.Bool("initdb",false, "Init database")
 	help := flag.Bool("help",false,"Print Help")
 
 	rand.Seed(time.Now().UTC().UnixNano())
@@ -109,11 +105,8 @@ func main() {
 		print_help()
 		return
 	}
-	if *initdb == true {
-		init_database()
-		return
-	}
-	
+
+	database.Connect()
 	run_beego()
 }
 
