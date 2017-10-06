@@ -7,11 +7,19 @@ import (
 
 func init() {
 
-	beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers:NurController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers:NurController"],
+	beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers:MainController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers:MainController"],
 		beego.ControllerComments{
-			Method: "GetNur",
-			Router: `/nur`,
+			Method: "Index",
+			Router: `/`,
 			AllowHTTPMethods: []string{"get"},
+			MethodParams: param.Make(),
+			Params: nil})
+
+	beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers:MainController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers:MainController"],
+		beego.ControllerComments{
+			Method: "IndexPost",
+			Router: `/`,
+			AllowHTTPMethods: []string{"post"},
 			MethodParams: param.Make(),
 			Params: nil})
 

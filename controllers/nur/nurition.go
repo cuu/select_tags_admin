@@ -54,3 +54,12 @@ func (this *NurController) AddNur() {
 	
 	this.Render()
 }
+
+// @router /nur/add [post]
+func (this *NurController) AddNurPost() {
+
+	this.TplName = "nur/nurition_add.tpl"
+	
+	this.Redirect("/",302)
+	return
+}

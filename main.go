@@ -53,7 +53,7 @@ func GuuRecoverPanic(ctx *context.Context) {
 		} else {
 			ctx.ResponseWriter.WriteHeader(500)
 		}
-		stack += "SoftRadius "
+		stack += "SelectTags "
 		ctx.WriteString(stack)
 	}
 	

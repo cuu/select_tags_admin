@@ -23,4 +23,12 @@ func init() {
 			MethodParams: param.Make(),
 			Params: nil})
 
+	beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers/nur:NurController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers/nur:NurController"],
+		beego.ControllerComments{
+			Method: "AddNurPost",
+			Router: `/nur/add`,
+			AllowHTTPMethods: []string{"post"},
+			MethodParams: param.Make(),
+			Params: nil})
+
 }

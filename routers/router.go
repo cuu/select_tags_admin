@@ -8,6 +8,6 @@ import (
 )
 
 func init() {
-	beego.Router("/", &controllers.MainController{})
+	beego.Include( &controllers.MainController{})
 	beego.Include( &nur.NurController{} ) //quote router
 }

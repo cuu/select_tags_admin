@@ -28,6 +28,17 @@ type BaseController struct {
 	beego.Controller
 }
 
+
+
+func (this *BaseController) InPost() bool {
+  return this.Ctx.Input.IsPost()
+}
+
+func (this *BaseController) InGet() bool {
+  return this.Ctx.Input.IsGet()
+}
+
+
 func (this *BaseController) GET(key string ) string {
 	if this.Ctx.Input.IsGet() {
 		return this.GetString(key)
@@ -72,6 +83,15 @@ func (this *BaseController) Prepare(){
   this.Data["xsrf_token"] = xsrfToken
   this.Data["xsrf_html"] = template.HTML(this.Controller.XSRFFormHTML())
 
+	this.Data["AppUrl"] = beego.AppConfig.String("appurl")
+
+
+	this.Data["Get"] = this.GET
+	this.Data["Post"] = this.POST
+	this.Data["InPost"]= this.InPost
+	this.Data["InGet"]  = this.InGet
+	
+	
   // if method is GET then auto create a form once token
   if this.Ctx.Request.Method == "GET" {
     this.FormOnceCreate()
