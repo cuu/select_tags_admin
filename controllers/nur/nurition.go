@@ -5,8 +5,11 @@ import (
 //  "github.com/astaxie/beego/orm"
 	. "github.com/cuu/select_tags/controllers"
 	rdb "github.com/cuu/select_tags/database"
+	
 	 "github.com/cuu/select_tags/models"
+	"github.com/cuu/select_tags/modules/nur"
 
+	
 	"fmt"
 )
 
@@ -32,6 +35,22 @@ func (this *NurController) GetNur() {
 	this.Data["Count"] = cnt
 	
 	this.TplName = "nur/nurition.tpl"
+	
+	this.Render()
+}
+
+// @router /nur/add [get]
+func (this *NurController) AddNur() {
+	/*
+	o := rdb.NewOrm()
+	nur := new(models.Nutrition)
+	*/
+
+	
+	this.TplName = "nur/nurition_add.tpl"
+
+	form := nur.AddNurForm{}
+	this.SetFormSets(&form)
 	
 	this.Render()
 }

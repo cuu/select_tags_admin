@@ -8,7 +8,7 @@ import (
 
   . "github.com/cuu/select_tags/controllers"
 	 "github.com/cuu/select_tags/database"
-
+	 "github.com/cuu/select_tags/utils"
 	"fmt"
 	"flag"
 	"errors"
@@ -17,10 +17,6 @@ import (
 	"math/rand"
 )
 
-
-func init() {
-
-}
 
 func print_help() {
 	fmt.Println("select_tags usage:")
@@ -74,6 +70,7 @@ func before_run_beego() {
 
 func run_beego(){
 
+	
 	beego.BConfig.WebConfig.DirectoryIndex = true
 	/*
 	beego.BConfig.Listen.AdminEnable = true
@@ -83,12 +80,22 @@ func run_beego(){
 	beego.BConfig.WebConfig.Session.SessionOn = true
 	beego.BConfig.WebConfig.Session.SessionName = "guusessionID"
 	beego.BConfig.WebConfig.Session.SessionGCMaxLifetime = 3600
-
+	beego.BConfig.WebConfig.FlashName ="GUU_SLASH"
+	//beego.BConfig.WebConfig.FlashSeperator ="GUUSLASH"
+	
+	
 	beego.BConfig.RecoverFunc = GuuRecoverPanic
-//	beego.SetStaticPath("/AdminLTE", "static/AdminLTE")
-//	fmt.Println(beego.AppConfig.DefaultString("DEFAULT::Secret","NULL"))
+	beego.BConfig.ServerName = "Apache2.0"
+	
+	beego.SetStaticPath("/alte", "static/thirdpart/adminlte")
 	//beego.ErrorHandler("404", page_not_found)
 	before_run_beego()
+
+	utils.InitCaptcha()
+	utils.InitForms()
+
+	database.Connect()
+	
 	beego.Run()	
 }
 
@@ -97,16 +104,14 @@ func main() {
 
 	help := flag.Bool("help",false,"Print Help")
 
-	rand.Seed(time.Now().UTC().UnixNano())
-
 	flag.Parse()
 
 	if *help == true {
 		print_help()
 		return
 	}
-
-	database.Connect()
+	
+	rand.Seed(time.Now().UTC().UnixNano())
 	run_beego()
 }
 

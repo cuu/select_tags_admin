@@ -6,7 +6,7 @@ type Nutrition struct {
   Id   int
 	Name string
 	Everyday int
-	indication string
+	Indication string
 }
 
 func init(){
