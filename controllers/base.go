@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"reflect"
 	"time"
+	"net/http/httputil"
 	
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/validation"
@@ -54,6 +55,31 @@ func (this *BaseController) POST(key string) string {
 
 	return ""
 }
+
+func (this *BaseController) RequestDump() string {
+	requestDump, err := httputil.DumpRequest(this.Ctx.Request, true)
+	if err != nil {
+		beego.Error(err)
+	}
+	return string(requestDump)
+
+/*
+something like this:
+POST / HTTP/1.1
+Host: 127.0.0.1:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*\/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.8,en;q=0.6,zh-TW;q=0.4
+Cache-Control: max-age=0
+Connection: keep-alive
+Content-Length: 40
+Content-Type: application/x-www-form-urlencoded
+	Cookie: GUID_8888=Jkrbr17qaFrnIZOzvpT6; CSRF-Token-I4SDB=uTwEyY9NK4DWJPgxhPojHkxigRq6rEwY; sessionid-I4SDB=q7wtmvQqQeLMEjqNcgA2iKCAKtDXX7gv; io=VE_DCWmfBzLlMiKeAAAE; wetalk_sess=59888bcd659d1...
+		
+*/
+	
+}
+
 
 func (this *BaseController) Prepare(){
 

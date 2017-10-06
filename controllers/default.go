@@ -2,7 +2,7 @@ package controllers
 
 import (
 //		"github.com/astaxie/beego"
-	"net/http/httputil"
+//	"net/http/httputil"
 	"fmt"
 )
 
@@ -26,11 +26,7 @@ func (c *MainController) IndexPost() {
 	c.Data["Email"] = "astaxie@gmail.com"
 
 
-	requestDump, err := httputil.DumpRequest(c.Ctx.Request, true)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(string(requestDump))
+	fmt.Println(c.RequestDump())
 
 	PostData := fmt.Sprintf("%s",  c.Input())
 
