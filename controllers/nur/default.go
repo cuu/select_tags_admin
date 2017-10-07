@@ -34,7 +34,7 @@ func (this *NurController) GetNur() {
 
 	this.Data["Count"] = cnt
 	
-	this.TplName = "nur/nurition.tpl"
+	this.TplName = "nur/index.tpl"
 	
 	this.Render()
 }
@@ -47,7 +47,7 @@ func (this *NurController) AddNur() {
 	*/
 
 	
-	this.TplName = "nur/nurition_add.tpl"
+	this.TplName = "nur/add.tpl"
 
 	form := nur.AddNurForm{}
 	this.SetFormSets(&form)
@@ -58,7 +58,7 @@ func (this *NurController) AddNur() {
 // @router /nur/add [post]
 func (this *NurController) AddNurPost() {
 
-	this.TplName = "nur/nurition_add.tpl"
+	this.TplName = "nur/add.tpl"
 	
 	this.Redirect("/",302)
 	return
