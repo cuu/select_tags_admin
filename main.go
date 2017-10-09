@@ -20,7 +20,6 @@ import (
 
 func print_help() {
 	fmt.Println("select_tags usage:")
-	fmt.Println("select_tags -initdb")
 	fmt.Println("select_tags -help ")
 	
 }
@@ -79,7 +78,14 @@ func run_beego(){
 	*/
 	beego.BConfig.WebConfig.Session.SessionOn = true
 	beego.BConfig.WebConfig.Session.SessionName = "guusessionID"
-	beego.BConfig.WebConfig.Session.SessionGCMaxLifetime = 3600
+	beego.BConfig.WebConfig.Session.SessionCookieLifeTime = 0
+	beego.BConfig.WebConfig.Session.SessionGCMaxLifetime = 86400
+	beego.BConfig.WebConfig.Session.SessionProvider = "file"
+
+
+	beego.BConfig.WebConfig.EnableXSRF = true
+	beego.BConfig.WebConfig.XSRFExpire = 86400 * 365
+	
 	beego.BConfig.WebConfig.FlashName ="GUU_SLASH"
 	//beego.BConfig.WebConfig.FlashSeperator ="GUUSLASH"
 	

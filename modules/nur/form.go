@@ -9,12 +9,14 @@ import (
 
 type AddNurForm struct {
 	NurName string `valid:"Required;MinSize(4)"`
-	EverydayDosage int
+	EverydayDosage string `valid:"Numeric"`
 	Indication string 
 }
 
 func (form *AddNurForm ) Valid (v *validation.Validation) {
-	return 
+
+	
+	
 }
 
 
@@ -28,8 +30,8 @@ func (form *AddNurForm) Labels() map[string]string {
 
 func (form *AddNurForm) Helps() map[string]string {
 	return map[string]string {
-		"NurName":" Name of Nurition",
-		"Indication": "indications ",
+//		"NurName":" Name of Nurition",
+//		"Indication": "indications ",
 	}
 }
 

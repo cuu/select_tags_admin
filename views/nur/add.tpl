@@ -2,7 +2,8 @@
 
 
 
-<form method="POST" action="/">
+<form method="POST" action="/nur/add">
+{{ .xsrf_html }} {{ .once_html }}
 
 {{template "form/fields.html" .AddNurFormSets }}
 

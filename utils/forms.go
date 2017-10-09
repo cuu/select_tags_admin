@@ -109,7 +109,8 @@ type FormSets struct {
 
 func (this *FormSets) SetError(fieldName, errMsg string) {
 	if fSet, ok := this.Fields[fieldName]; ok {
-		fSet.Error = this.Locale.Tr(errMsg)
+		//fSet.Error = this.Locale.Tr(errMsg)
+		fSet.Error = errMsg
 	}
 }
 
@@ -124,6 +125,7 @@ func NewFormSets(form interface{}, errs map[string]*validation.Error, locale For
 	} else {
 		
 		fSets.Locale = fakeLocaler
+		locale = fSets.Locale
 	}
 
 	val := reflect.ValueOf(form)
@@ -246,7 +248,7 @@ outFor:
 			}
 		}
 		
-//		fSet.LabelText = locale.Tr(fSet.LabelText)
+		fSet.LabelText = locale.Tr(fSet.LabelText)
 		
 		// get field help
 		if helps != nil {
@@ -254,14 +256,14 @@ outFor:
 				fSet.Help = helps[name]
 			}
 		}
-//		fSet.Help = locale.Tr(helps[name])
+		fSet.Help = locale.Tr(helps[name])
 
 		if places != nil {
 			if _, ok := places[name]; ok {
 				fSet.Placeholder = places[name]
 			}
 		}
-//		fSet.Placeholder = locale.Tr(fSet.Placeholder)
+		fSet.Placeholder = locale.Tr(fSet.Placeholder)
 
 		if len(fSet.Placeholder) > 0 {
 			fSet.Placeholder = fmt.Sprintf(` placeholder="%s"`, fSet.Placeholder)

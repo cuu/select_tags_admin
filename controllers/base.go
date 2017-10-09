@@ -108,7 +108,7 @@ func (this *BaseController) Prepare(){
   xsrfToken := this.Controller.XSRFToken()
   this.Data["xsrf_token"] = xsrfToken
   this.Data["xsrf_html"] = template.HTML(this.Controller.XSRFFormHTML())
-
+	
 	this.Data["AppUrl"] = beego.AppConfig.String("appurl")
 
 
@@ -304,6 +304,7 @@ func (this *BaseController) validForm(form interface{}, names ...string) (bool, 
 
   // check form once
   if this.FormOnceNotMatch() {
+		beego.Error("BaseController validForm FormOnceNotMatch,Maybe miss .once_html in tpl")
     return false, nil
   }
 
@@ -312,6 +313,7 @@ func (this *BaseController) validForm(form interface{}, names ...string) (bool, 
   if ok, _ := valid.Valid(form); !ok {
     errs := valid.ErrorMap()
     this.Data[errName] = &valid
+		beego.Error(errName,errs)
     return false, errs
   }
   return true, nil
