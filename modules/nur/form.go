@@ -4,41 +4,62 @@ package nur
 import (
 //	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/validation"
+	"github.com/cuu/select_tags/models"
+	"github.com/cuu/select_tags/utils"
 	
 )
 
-type AddNurForm struct {
-	NurName string `valid:"Required;MinSize(4)"`
-	EverydayDosage string `valid:"Numeric"`
+type NurForm struct {
+	Name string `valid:"Required;MinSize(4)"`
+	Everyday string `valid:"Numeric"`
 	Indication string 
 }
 
-func (form *AddNurForm ) Valid (v *validation.Validation) {
+func (form *NurForm ) Valid (v *validation.Validation) {
 
 	
 	
 }
 
 
-func (form *AddNurForm) Labels() map[string]string {
+func (form *NurForm) Labels() map[string]string {
 	return map[string]string {
-		"NurName": "nur name",
-		"EverydayDosage": "nur dosage",
+		"Name": "nur name",
+		"Everyday": "nur dosage",
 		"Indication":  "nur indication",
 	}
 }
 
-func (form *AddNurForm) Helps() map[string]string {
+func (form *NurForm) Helps() map[string]string {
 	return map[string]string {
-//		"NurName":" Name of Nurition",
+//		"Name":" Name of Nurition",
 //		"Indication": "indications ",
 	}
 }
 
-func (form *AddNurForm) Placeholders() map[string]string {
+func (form *NurForm) Placeholders() map[string]string {
 	return map[string]string{
-		"NurName":" Name of Nurition",
-		"EverydayDosage": " Everyday dosage in mg",
+		"Name":" Name of Nurition",
+		"Everyday": " Everyday dosage in mg",
 		"Indication": "Nurition indications",
 	}
+}
+
+func (form *NurForm) SetFromNutrition( m *models.Nutrition) {
+	utils.SetFormValues(m,form)
+	
+}
+
+func (form *NurForm) UpdateNutrition( m *models.Nutrition) error {
+	changes := utils.FormChanges(m,form)
+	if len(changes) == 0 {
+		return nil
+	}
+
+	utils.SetFormValues(form,m)
+
+	changes = append(changes,"Updated")// Updated ==> auto_now, auto update timestamp
+
+	return m.Update(changes...)
+	
 }

@@ -53,7 +53,7 @@ func Nutritions() orm.QuerySeter {
 
 
 
-func AddNur(nur *Nutrition, name string, everyday string,indication string) error {
+func SaveNur(nur *Nutrition, name string, everyday string,indication string) error {
 	nur.Name = name
 	if i,err := strconv.Atoi(everyday);err == nil {
 		nur.Everyday = i
