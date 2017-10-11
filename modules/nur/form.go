@@ -2,6 +2,7 @@ package nur
 
 
 import (
+	"strconv"
 //	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/validation"
 	"github.com/cuu/select_tags/models"
@@ -48,6 +49,20 @@ func (form *NurForm) Placeholders() map[string]string {
 func (form *NurForm) SetFromNutrition( m *models.Nutrition) {
 	utils.SetFormValues(m,form)
 	
+}
+
+func (form *NurForm) SaveNutrition(m *models.Nutrition) error {
+
+	m.Name = form.Name
+	if i,err := strconv.Atoi(form.Everyday);err == nil {
+		m.Everyday = i
+	}else {
+		m.Everyday = -1
+	}
+	
+	m.Indication = form.Indication
+
+	return m.Insert()	
 }
 
 func (form *NurForm) UpdateNutrition( m *models.Nutrition) error {

@@ -7,8 +7,10 @@ function edit_nur(id) {
 }
 
 function delete_nur(id){
-		var r = confirm("Delete Nur "+id+"?")
-		
+		var r = confirm("Delete Nur ?");
+		if (r == true) {
+				window.location.href="/nur/delete/"+id;
+		}
 }
 
 

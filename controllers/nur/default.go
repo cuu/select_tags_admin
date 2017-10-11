@@ -1,16 +1,19 @@
 package nur
 
 import (
+	"fmt"
+
+	
 	"github.com/astaxie/beego"
 //  "github.com/astaxie/beego/orm"
 	. "github.com/cuu/select_tags/controllers"
 //rdb "github.com/cuu/select_tags/database"
 	
-	 "github.com/cuu/select_tags/models"
+	"github.com/cuu/select_tags/models"
 	"github.com/cuu/select_tags/modules/nur"
 
 	
-	"fmt"
+	
 )
 
 type NurController struct {
@@ -18,12 +21,9 @@ type NurController struct {
 }
 
 
-func (this *NurController) URLMapping() {
-    this.Mapping("GetNur", this.GetNur)
-}
 
 // @router /nur [get]
-func (this *NurController) GetNur() {
+func (this *NurController) Nur() {
 
 	var nurs []models.Nutrition
 	
@@ -44,7 +44,7 @@ func (this *NurController) GetNur() {
 }
 
 // @router /nur/add [get]
-func (this *NurController) AddNur() {
+func (this *NurController) NurAdd() {
 	/*
 	o := rdb.NewOrm()
 	nur := new(models.Nutrition)
@@ -60,7 +60,7 @@ func (this *NurController) AddNur() {
 }
 
 // @router /nur/add [post]
-func (this *NurController) AddNurPost() {
+func (this *NurController) NurAddPost() {
 
 	this.TplName = "nur/add.tpl"
 
@@ -71,9 +71,8 @@ func (this *NurController) AddNurPost() {
 		return
 	}
 
-	nur := new(models.Nutrition)
-	if err := models.SaveNur(nur,form.Name,form.Everyday,form.Indication); err == nil {
-	
+	nurMd := new(models.Nutrition)
+	if err := form.SaveNutrition(nurMd); err == nil {
 		this.Redirect("/nur",302)
 		return
 	}else {
@@ -86,7 +85,7 @@ func (this *NurController) AddNurPost() {
 
 
 // @router /nur/edit/?:id [get]
-func (this *NurController) EditNur() {
+func (this *NurController) NurEdit() {
 
 	this.TplName = "nur/edit.tpl"
 	id , _ := this.GetInt(":id")
@@ -117,10 +116,8 @@ func (this *NurController) EditNur() {
 }
 
 // @router /nur/edit/?:id [post]
-func (this *NurController) EditNurPost() {
+func (this *NurController) NurEditPost() {
 	id , _ := this.GetInt(":id")
-
-	fmt.Println("EditNurPost id:",id,this.POST(":id"))
 	
 	var  nurMd models.Nutrition
 
@@ -152,3 +149,32 @@ func (this *NurController) EditNurPost() {
 	}
 	return
 }
+
+// @router /nur/delete/?:id [get]
+func (this *NurController) NurDelete() {
+	id , _ := this.GetInt(":id")
+	
+	var  nurMd models.Nutrition
+
+		// If I had bind data to user, I'll filter Nutritions with User.Id
+	if id > 0 {
+		qs := models.Nutritions().Filter("Id",id)
+
+		qs.RelatedSel(1).One(&nurMd)
+		
+	}
+	
+	if nurMd.Id == 0 {
+		this.Abort("502")
+		return
+	}
+
+	if err := nurMd.Delete(); err == nil {
+		this.FlashRedirect("/nur",302,"DeleteSuccess")
+		return
+	}else {
+		beego.Error(err)
+		this.Data["Error"] = err
+	}
+}
+

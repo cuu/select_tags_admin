@@ -6,7 +6,7 @@
 
 {{template "form/fields.html" .NurFormSets }}
 
-<button class="btn btn-primary"> Add <i class="icon-chevron-sign-right"></i></button>
+<button class="btn btn-primary"> Submit <i class="icon-chevron-sign-right"></i></button>
 
 </form>
 

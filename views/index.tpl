@@ -76,6 +76,14 @@
 		</div>
 			
     </div>
+
+		<div>
+			<ul>
+				<li><a href="/nur"> List Nutritions </a></li>
+			</ul>
+		</div>
+		
+			
   </header>
   <footer>
     <div class="author">

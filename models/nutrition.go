@@ -2,7 +2,7 @@ package models
 
 import (
 	"time"
-	"strconv"
+//	"strconv"
 	"github.com/astaxie/beego/orm"
 )
 
@@ -49,21 +49,6 @@ func (m *Nutrition) Delete() error {
 
 func Nutritions() orm.QuerySeter {
 	return orm.NewOrm().QueryTable("nutrition").OrderBy("-Id")
-}
-
-
-
-func SaveNur(nur *Nutrition, name string, everyday string,indication string) error {
-	nur.Name = name
-	if i,err := strconv.Atoi(everyday);err == nil {
-		nur.Everyday = i
-	}else {
-		nur.Everyday = -1
-	}
-	
-	nur.Indication = indication
-
-	return nur.Insert()
 }
 
 

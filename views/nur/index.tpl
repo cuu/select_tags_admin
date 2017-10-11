@@ -2,7 +2,10 @@
 
 <h1>{{.Title }} </h1>
 
+<a href="/" >Home</a> <br />
+
 {{.Count}}
+
 <br />
 <button onclick="add_nur()" > Add Nurition </button>
 
