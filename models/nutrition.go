@@ -46,6 +46,9 @@ func (m *Nutrition) Delete() error {
 }
 
 
+func (m *Nutrition) String() string {
+	return m.Name
+}
 
 func Nutritions() orm.QuerySeter {
 	return orm.NewOrm().QueryTable("nutrition").OrderBy("-Id")

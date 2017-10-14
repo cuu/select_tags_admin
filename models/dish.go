@@ -17,7 +17,35 @@ type Dish struct {
 }
 
 
+func (m *Dish) Insert() error {
+	if _,err := orm.NewOrm().Insert(m);err != nil {
+		return err
+	}
+	return nil
+}
 
+func (m *Dish) Read(fields ...string) error {
+	if err := orm.NewOrm().Read(m,fields...); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *Dish) Update(fields ...string) error {
+	if _,err := orm.NewOrm().Update(m,fields...); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *Dish) Delete() error {
+	if _,err := orm.NewOrm().Delete(m); err != nil {
+		return err
+	}
+	return nil
+}
+
+		
 func Dishes() orm.QuerySeter {
 	return orm.NewOrm().QueryTable("dish").OrderBy("-Id")
 }

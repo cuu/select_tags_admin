@@ -79,6 +79,7 @@
 
 		<div>
 			<ul>
+				<li><a href="/dish"> List Dish </a></li>
 				<li><a href="/nur"> List Nutritions </a></li>
 			</ul>
 		</div>

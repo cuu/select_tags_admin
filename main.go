@@ -5,7 +5,8 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
 	"github.com/astaxie/beego/logs"
-
+	"github.com/beego/compress"
+	
   . "github.com/cuu/select_tags/controllers"
 	 "github.com/cuu/select_tags/database"
 	 "github.com/cuu/select_tags/utils"
@@ -17,10 +18,17 @@ import (
 	"math/rand"
 )
 
+var (
+	BinaryName ="select_tags"
+	IsProMode bool
+	AppUrl string
+	CompressConfPath = "conf/compress.json"
+)
+
 
 func print_help() {
-	fmt.Println("select_tags usage:")
-	fmt.Println("select_tags -help ")
+	fmt.Println(BinaryName, " usage:")
+	fmt.Println(BinaryName, " -help ")
 	
 }
 
@@ -59,8 +67,34 @@ func GuuRecoverPanic(ctx *context.Context) {
 }
 
 
+func settingCompress() {
+	  setting, err := compress.LoadJsonConf(CompressConfPath, IsProMode, AppUrl)
+  if err != nil {
+    beego.Error(err)
+    return
+  }
+
+  setting.RunCommand()
+
+  if IsProMode {
+    setting.RunCompress(true, false, true)
+  }
+
+  beego.AddFuncMap("compress_js", setting.Js.CompressJs)
+  beego.AddFuncMap("compress_css", setting.Css.CompressCss)
+}
+
+
 func before_run_beego() {
 	
+	IsProMode = beego.BConfig.RunMode == "pro"
+  if IsProMode {
+    beego.SetLevel(beego.LevelInformational)
+  }
+
+	AppUrl = beego.AppConfig.String("appurl")
+	
+	settingCompress()
 
 	beego.ErrorController(&ErrorController{})
 

@@ -2,6 +2,14 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, max    imum-scale=1.0, user-scalable=no">
 
-{{template "js.html" .}}
+<meta name="_xsrf" content="{{.xsrf_token}}" />
+
+
+{{compress_css "lib"}}
+{{compress_css "app"}}
+{{compress_js  "lib"}}
+
+{{compress_js  "user"}}
+
 </head>
 
