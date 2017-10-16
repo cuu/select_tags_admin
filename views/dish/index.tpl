@@ -8,7 +8,7 @@
 			 {{.Count}}
 
 			 <br />
-			 <button onclick="add_dish()" > Add dish </button>
+			 <button onclick="dish_add()" > Add dish </button>
 
 
 

@@ -19,6 +19,13 @@ func (e SliceNutritionField) Value() []string {
 	return d
 }
 
+func (e SliceNutritionField) Label() []string {
+	var d []string
+	for _,p := range e {
+		d = append(d,p.Name)
+	}
+	return d
+}
 
 func (e *SliceNutritionField) Set(d []Nutrition ) {
 	
@@ -36,7 +43,8 @@ func (e *SliceNutritionField) String() string {
 }
 
 func (e *SliceNutritionField) FieldType() int {
-	return orm.TypeCharField
+	//	return orm.TypeCharField
+	return orm.TypeIntegerField
 }
 
 func (e *SliceNutritionField) SetRaw(value interface{} ) error {

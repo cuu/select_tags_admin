@@ -9,6 +9,10 @@ import (
 
 func init() {
 	beego.Include( &controllers.MainController{})
+
+	beego.Include( &controllers.ModelsGetSearchController{})
+	
 	beego.Include( &nur.NurController{} ) //quote router
-	beego.Include( &dish.DishController{} ) 
+	beego.Include( &dish.DishController{} )
+	
 }

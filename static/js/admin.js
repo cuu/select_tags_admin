@@ -7,7 +7,7 @@
 			$e.select2({
 				minimumInputLength: 3,
 				ajax: {
-					url: '/admin/model/select',
+					url: '/model/select',
 					type: 'POST',
 					data: function (query, page) {
 						return {
@@ -32,7 +32,7 @@
 				initSelection: function(elm, cbk){
 					var id = parseInt($e.val(), 10);
 					if(id){
-						$.post('/admin/model/get', {'id': id, 'model': model}, function(d){
+						$.post('/model/pick', {'id': id, 'model': model}, function(d){
 							if(d.success){
 								if(d.data && d.data.length){
 									cbk({

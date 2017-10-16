@@ -3,6 +3,8 @@ package dish
 import (
 	"fmt"
 
+	"github.com/astaxie/beego/orm"
+	
 	. "github.com/cuu/select_tags/controllers"
 	"github.com/cuu/select_tags/models"
 
@@ -12,6 +14,24 @@ import (
 
 type DishController struct {
 	BaseController
+	object models.Dish
+}
+
+
+func (this *DishController) Object() interface{} {
+	return &this.object
+}
+
+func (this *DishController) ObjectQs() orm.QuerySeter {
+	return models.Dishes().RelatedSel()
+}
+
+func (this *DishController) GetForm() dish.DishForm {
+	form := dish.DishForm{}
+
+	form.ListNutritions() 
+
+	return form
 }
 
 // @router /dish [get]
@@ -38,7 +58,10 @@ func (this *DishController) DishAdd() {
 
 
 	this.TplName = "dish/add.tpl"
-	form := dish.DishForm{}
+	form := this.GetForm()
+	
+
+	
 	this.SetFormSets(&form)
 	this.Render()
 	

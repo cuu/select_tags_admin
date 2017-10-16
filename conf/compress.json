@@ -37,7 +37,9 @@
 						"user":{
 								"DistFile":"nur/index.js",
 								"SourceFiles":[
-										"nur/index.js"
+										"nur/index.js",
+										"dish/index.js"
+										
 								]
 						}
         }
