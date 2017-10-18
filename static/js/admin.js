@@ -1,27 +1,28 @@
 (function($){
 
 		$(function(){
-//				$('[rel=select2-admin-model]').each(function(_,e){
-				$('.select2-admin-model').each(function(_,e){
+				$('.select2-admin-model,[rel=select2-admin-model] ').each(function(_,e){
 						var $e = $(e);
 						console.log($e);
 						var model = $e.data('model');
 						$e.select2({
-								width:null,
-								minimumInputLength: 3,
+								placeholder:"search",
+								delay:250,
+								minimumInputLength: 2,
 								ajax: {
 										url: '/model/select',
 										type: 'POST',
-										data: function (query, page) {
+										
+										data: function (params) {
 												return {
-														'search': query,
+														'search': params.term,
 														'model': model
 												};
 										},
-										results: function(d){
+										processResults: function(data,params){
 												var results = [];
-												if(d.success && d.data){
-														var data = d.data;
+												if(data.success && data.data){
+														var data = data.data;
 														$.each(data, function(i,v){
 																results.push({
 																		'id': v[0],
@@ -32,24 +33,29 @@
 												return {'results': results};
 										},
 										cache:true
-								},
-								initSelection: function(elm, cbk){
-										var id = parseInt($e.val(), 10);
-										if(id){
-												$.post('/model/pick', {'id': id, 'model': model}, function(d){
-														if(d.success){
-																if(d.data && d.data.length){
-																		cbk({
-																				'id': d.data[0],
-																				'text': d.data[1]
-																		});
-																}
-														}
-												});
-										}
+								} // end ajax
+								/*
+								initSelection: function(ele,callback) {
+										//console.log(JSON.stringify(ele));
+										
 								}
+								*/						 
+								
 						});
 				});
 		});
+
+
+		$( ".select2-admin-model" ).on( "select2:open", function() {
+        if ( $( this ).parents( "[class*='has-']" ).length ) {
+						var classNames = $( this ).parents( "[class*='has-']" )[ 0 ].className.split( /\s+/ );
+						
+						for ( var i = 0; i < classNames.length; ++i ) {
+								if ( classNames[ i ].match( "has-" ) ) {
+										$( "body > .select2-container" ).addClass( classNames[ i ] );
+								}
+						}
+        }
+    });
 		
 })(jQuery);

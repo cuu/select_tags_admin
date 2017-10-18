@@ -10,7 +10,7 @@
                 "SourceFiles": [
                     "jquery.min.js",
                     "jquery.extend.js",
-                    "bootstrap.js",
+                    "bootstrap.min.js",
                     "prettify.js",
                     "jStorage.js",
 										"lib.min.js",
@@ -54,7 +54,7 @@
             "lib": {
                 "DistFile": "lib.min.css",
                 "SourceFiles": [
-                    "bootstrap.css",
+                    "bootstrap.min.css",
                     "bootstrap-theme.css",
                     "font-awesome.min.css",
                     "prettify.css",

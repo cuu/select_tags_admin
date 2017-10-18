@@ -9,7 +9,7 @@ import (
 
 type DishForm struct {
 	Name string `valid:"Required;MinSize(2)"`
-	Test1 []int `form:"attr(rel,select2-admin-model);attr(data-model,Nutrition)" valid:""`
+	Test1 []int `form:"type(select);attr(rel,select2-admin-model);attr(data-model,Nutrition)" valid:""`
 //	Test2 int `form:type(select);attr(rel,select2)" valid:""`
 	Nurs []models.Nutrition `form:"type(select);attr(rel,select2);attr(multiple,multiple)" valid:""`
 
