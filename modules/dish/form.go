@@ -13,7 +13,7 @@ type DishForm struct {
 //	Test2 int `form:type(select);attr(rel,select2)" valid:""`
 	Nurs []models.Nutrition `form:"type(select);attr(rel,select2);attr(multiple,multiple)" valid:""`
 
-	Nurs2 models.SliceNutritionField `form:"attr(rel,select2-admin-model);attr(data-model,Nutrition);attr(multiple,multiple)" valid:""`
+	Nurs2 models.SliceNutritionField `form:"type(select);class(select2-admin-model);attr(data-model,Nutrition);attr(multiple,multiple)" valid:""`
 	
 }
 

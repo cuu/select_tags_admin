@@ -94,6 +94,7 @@ type FieldSet struct {
 	Kind        string
 	Placeholder string
 	Attrs       string
+	Class       string `Guu added for class specific, class(class1 class2 ...)`
 	FormElm     reflect.Value
 	Locale      FormLocaler
 }
@@ -170,7 +171,8 @@ outFor:
 		name := fT.Name
 		value := f.Interface()
 		fTyp := "text"
-
+		class := ""
+		
 		switch f.Kind() {
 		case reflect.Bool:
 			fTyp = "checkbox"
@@ -208,6 +210,8 @@ outFor:
 					} else {
 						attrm[v] = v
 					}
+				case "class": // guu added
+					class = v
 				}
 			}
 		}
@@ -229,6 +233,7 @@ outFor:
 		fSet.Value = value
 		fSet.Attrs = attrs
 		fSet.FormElm = elm
+		fSet.Class  = class
 		fSet.Locale = locale
 
 		if i := strings.IndexRune(fTyp, ','); i != -1 {
@@ -373,8 +378,8 @@ func initCommonField() {
 	RegisterFieldCreater("select", func(fSet *FieldSet) {
 		fSet.Field = func() template.HTML {
 			var options string
-			str := fmt.Sprintf(`<select id="%s" name="%s" class="form-control"%s%s>%s</select>`,
-				fSet.Id, fSet.Name, fSet.Placeholder, fSet.Attrs)
+			str := fmt.Sprintf(`<select id="%s" name="%s" class="form-control %s"%s%s>%s</select>`,
+				fSet.Id, fSet.Name, fSet.Class,fSet.Placeholder, fSet.Attrs)
 
 			fun := fSet.FormElm.Addr().MethodByName(fSet.Name + "SelectData")
 

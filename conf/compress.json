@@ -11,9 +11,10 @@
                     "jquery.min.js",
                     "jquery.extend.js",
                     "bootstrap.js",
-                    "lib.min.js",
                     "prettify.js",
-                    "jStorage.js"
+                    "jStorage.js",
+										"lib.min.js",
+										"select2.full.js"
                 ],
                 "SkipFiles": [
                     "jquery.min.js",
@@ -57,7 +58,8 @@
                     "bootstrap-theme.css",
                     "font-awesome.min.css",
                     "prettify.css",
-                    "select2.css"
+                    "select2.css",
+										"select2-bootstrap.min.css"
                 ],
                 "SkipFiles": [
                     "font-awesome.min.css",
