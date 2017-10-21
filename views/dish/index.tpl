@@ -15,15 +15,21 @@
 			 <table border="1">
 			 <tr>
 				<th> Name </th>
-				<th> Nurs </th>
+				<th> Nutritions </th>
 				<th> Operation</th>
 			</tr>
 
 			{{ range .Dishes }}
 			<tr>
 				<td> <div> {{.Name }} </div> </td>
-				<td> <div> {{.Nurs}} mg </div></td>
-				<td><div> <a href="#" onclick="delete_dish({{.Id}})">Delete </a> || <a href="#" onclick="edit_dish({{.Id}});"> Edit </a> </div> </td>
+				<td>
+					<div>
+								{{with .Nutritions }}
+									 {{.String}}
+								{{end}}
+					</div>
+				</td>
+				<td><div> <a href="#" onclick="dish_delete({{.Id}})">Delete </a> || <a href="#" onclick="dish_edit({{.Id}});"> Edit </a> </div> </td>
 			</tr>
 
 			{{end}}

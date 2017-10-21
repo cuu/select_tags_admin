@@ -66,7 +66,7 @@ func (this *NurController) NurAddPost() {
 
 	form := nur.NurForm{}
 	if this.ValidFormSets(&form) == false {
-		beego.Error("AddNurForm valid failed:")
+		beego.Error("NurAddForm valid failed:")
 		this.Render()
 		return
 	}
@@ -76,7 +76,7 @@ func (this *NurController) NurAddPost() {
 		this.Redirect("/nur",302)
 		return
 	}else {
-		beego.Error("Add Nur Failed:",err)
+		beego.Error("Nur Add Failed:",err)
 	}
 
 	this.Render()

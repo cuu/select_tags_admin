@@ -9,6 +9,8 @@ import (
 )
 
 
+var OB orm.Ormer
+
 func Connect() {
   orm.Debug = true
 	orm.RegisterDriver("mysql", orm.DRMySQL)
@@ -37,3 +39,21 @@ func NewOrm() orm.Ormer {
 	o.Using("default")
 	return o
 }
+
+
+func StartTrans(){
+	o := NewOrm()
+	OB = o
+	OB.Begin()
+}
+
+
+func Rollback() {
+	OB.Rollback()
+}
+
+
+func Commit() {
+	OB.Commit()
+}
+

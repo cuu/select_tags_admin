@@ -23,4 +23,20 @@ func init() {
 			MethodParams: param.Make(),
 			Params: nil})
 
+	beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers/dish:DishController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers/dish:DishController"],
+		beego.ControllerComments{
+			Method: "DishAddPost",
+			Router: `/dish/add`,
+			AllowHTTPMethods: []string{"post"},
+			MethodParams: param.Make(),
+			Params: nil})
+
+	beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers/dish:DishController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers/dish:DishController"],
+		beego.ControllerComments{
+			Method: "DishDelete",
+			Router: `/dish/delete/?:id`,
+			AllowHTTPMethods: []string{"get"},
+			MethodParams: param.Make(),
+			Params: nil})
+
 }

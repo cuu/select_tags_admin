@@ -1,14 +1,15 @@
 package dish
 
 import (
-	"fmt"
-
+//	"fmt"
+	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	
 	. "github.com/cuu/select_tags/controllers"
 	"github.com/cuu/select_tags/models"
 
 	"github.com/cuu/select_tags/modules/dish"
+	"github.com/cuu/select_tags/database"
 	
 )
 
@@ -37,15 +38,18 @@ func (this *DishController) GetForm() dish.DishForm {
 // @router /dish [get]
 func (this *DishController) Dish() {
 
-	var dishes []models.Dish
+	var dishes []*models.Dish
 
 	this.Data["Title"] = "Dish"
 
 	qs := models.Dishes().OrderBy("-Created").Limit(25).RelatedSel()
 
 	models.ListObjects(qs,&dishes)
-	fmt.Println(dishes)
 
+	for _,p := range dishes {
+		p.LoadNutritions()
+	}
+		
 	this.Data["Count"] = len(dishes)
 	this.Data["Dishes"] = dishes
 
@@ -65,4 +69,63 @@ func (this *DishController) DishAdd() {
 	this.SetFormSets(&form)
 	this.Render()
 	
+}
+
+// @router /dish/add [post]
+func (this *DishController) DishAddPost() {
+	this.TplName = "dish/add.tpl"
+	form := dish.DishForm{}
+	
+	ids := this.GetStrings("NursSelect")
+	form.Nurs.Set(ids)
+	
+	if this.ValidFormSets(&form) == false {
+		beego.Error("DishAdd Form valid failed: ")
+		this.Render()
+		return
+	}
+	
+	dishMd := new(models.Dish)
+	if err := form.SaveDish(dishMd); err == nil {
+		this.Redirect("/dish",302)
+		return
+	}else {
+		beego.Error("Dish Add Failed: ",err)
+	}
+	
+}
+
+
+// @router /dish/delete/?:id [get]
+func (this *DishController) DishDelete() {
+	id, _ := this.GetInt(":id")
+	var dishMd models.Dish
+	if id > 0 {
+		qs := models.Dishes().Filter("Id",id)
+		qs.RelatedSel(1).One(&dishMd)
+	}
+
+
+	if dishMd.Id == 0 {
+		this.Abort("502")
+		return
+	}
+
+	dishMd.LoadNutritions()
+
+	database.StartTrans()
+	
+	dishMd.RemoveNutritions()
+	
+	if err := dishMd.Delete(); err == nil {
+
+		database.Commit()
+		this.FlashRedirect("/dish",302,"DeleteSuccess")
+		return
+	} else {
+		database.Rollback()
+		beego.Error(err)
+		this.Data["Error"] = err
+		this.Render()
+	}
 }

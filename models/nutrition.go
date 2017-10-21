@@ -1,8 +1,11 @@
 package models
 
 import (
+//	"fmt"
 	"time"
-//	"strconv"
+	"strings"
+	//	"strconv"
+	
 	"github.com/astaxie/beego/orm"
 )
 
@@ -11,6 +14,7 @@ type Nutrition struct {
 	Name string `orm:"size(255);unique"`
 	Everyday int ``
 	Indication string `orm:"size(1024)"`
+	Dishes  []*Dish   `orm:"reverse(many)"`
 	Created  time.Time  `orm:"auto_now_add"`
 	Updated  time.Time  `orm:"auto_now"`
 }
@@ -53,6 +57,22 @@ func (m *Nutrition) String() string {
 func Nutritions() orm.QuerySeter {
 	return orm.NewOrm().QueryTable("nutrition").OrderBy("-Id")
 }
+
+
+type SliceNutritionPointers []*Nutrition
+
+func (e SliceNutritionPointers) Label() []string {
+	var d []string
+	for _,p := range e {
+		d = append(d,p.Name)
+	}
+	return d
+}
+
+func (e *SliceNutritionPointers) String() string {
+	return strings.Join(e.Label(),",")
+}
+
 
 
 func init(){
