@@ -14,7 +14,7 @@ type Nutrition struct {
 	Name string `orm:"size(255);unique"`
 	Everyday int ``
 	Indication string `orm:"size(1024)"`
-	Dishes  []*Dish   `orm:"reverse(many)"`
+	Ingredients  SliceIngredientPointers  `orm:"reverse(many)"`
 	Created  time.Time  `orm:"auto_now_add"`
 	Updated  time.Time  `orm:"auto_now"`
 }

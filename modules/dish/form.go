@@ -3,7 +3,8 @@ package dish
 import (
 
 	//"fmt"
-
+//	"time"
+	
 //	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/validation"
 	"github.com/cuu/select_tags/models"
@@ -11,20 +12,20 @@ import (
 )
 
 type DishForm struct {
+//	TheDate  time.Time `form:"type(date);"`   // Specify the date manually
 	Name string `valid:"Required;MinSize(2)"`
-//	Test1 []int `form:"type(select);attr(rel,select2-admin-model);attr(data-model,Nutrition)" valid:""`
-//	Test2 int `form:type(select);attr(rel,select2)" valid:""`
-	//Nurs []models.Nutrition `form:"type(select);attr(rel,select2);attr(multiple,multiple)" valid:""`
+	
+	EstimatePrice int
+	
+	IngredientsSelect models.SliceStringField `form:"type(select);class(select2-admin-model);attr(data-model,Ingredient);attr(multiple,multiple)" valid:""`
 
-	NursSelect models.SliceStringField `form:"type(select);class(select2-admin-model);attr(data-model,Nutrition);attr(multiple,multiple)" valid:""`
-
-	Nurs models.SliceNutritionField `form:"-"`
+	Ingredients models.SliceIngredientField `form:"-"`
 }
 
 
 
-func (form *DishForm) ListNutritions() (int64, error) {
-	return models.Nutritions().All(&form.Nurs)
+func (form *DishForm) ListIngredients() (int64, error) {
+	return models.Ingredients().Limit(25).All(&form.Ingredients)
 }
 
 func (form *DishForm) Valid( v*validation.Validation) {
@@ -66,7 +67,7 @@ func (form *DishForm) SaveDish(m *models.Dish) error {
 	err := m.Insert()
 	if err == nil {
 		/// We need the inserted id for QueryM2M add
-		m.SetNutritions(form.Nurs)
+		m.SetIngredients(form.Ingredients)
 	}
 	
 	return err

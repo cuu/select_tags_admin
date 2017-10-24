@@ -15,7 +15,7 @@
 			 <table border="1">
 			 <tr>
 				<th> Name </th>
-				<th> Nutritions </th>
+				<th> Ingredients </th>
 				<th> Operation</th>
 			</tr>
 
@@ -24,7 +24,7 @@
 				<td> <div> {{.Name }} </div> </td>
 				<td>
 					<div>
-								{{with .Nutritions }}
+								{{with .Ingredients }}
 									 {{.String}}
 								{{end}}
 					</div>

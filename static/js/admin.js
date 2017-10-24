@@ -3,7 +3,7 @@
 		$(function(){
 				$('.select2-admin-model,[rel=select2-admin-model] ').each(function(_,e){
 						var $e = $(e);
-						console.log($e);
+						//console.log($e);
 						var model = $e.data('model');
 						$e.select2({
 								placeholder:"search",

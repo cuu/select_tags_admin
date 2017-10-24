@@ -15,7 +15,10 @@ type Dish struct {
 	Id int
 	Name string `orm:"size(255);unique"`
 	//	Nutritions []*Nutrition `orm:"rel(m2m)"`
-	Nutritions  SliceNutritionPointers `orm:"rel(m2m);on_delete(set_null)"`
+	//Nutritions  SliceNutritionPointers `orm:"rel(m2m);on_delete(set_null)"`
+	EstimatePrice int
+	
+	Ingredients SliceIngredientPointers `orm:"rel(m2m)"`
 	Created  time.Time  `orm:"auto_now_add"`
 	Updated  time.Time  `orm:"auto_now"`
 }
@@ -49,28 +52,28 @@ func (m *Dish) Delete() error {
 	return nil
 }
 
-func (m *Dish) RemoveNutritions() (int64,error) {
-	m2m := orm.NewOrm().QueryM2M(m,"Nutritions")
+func (m *Dish) RemoveIngredients() (int64,error) {
+	m2m := orm.NewOrm().QueryM2M(m,"Ingredients")
 
-	num,err := m2m.Remove(m.Nutritions)
+	num,err := m2m.Remove(m.Ingredients)
 	return num,err
 }
 
-func (m *Dish) LoadNutritions() (int64,error) {
-	num,err := orm.NewOrm().LoadRelated(m,"Nutritions")
-	fmt.Println("LoadNutritions: ",num)
+func (m *Dish) LoadIngredients() (int64,error) {
+	num,err := orm.NewOrm().LoadRelated(m,"Ingredients")
+	fmt.Println("LoadIngredients: ",num)
 	return num,err
 }
 
-func (m *Dish) SetNutritions( nurs []Nutrition) {
+func (m *Dish) SetIngredients( arr []Ingredient ) {
 	if m.Id == 0 {
 		beego.Error("We should Insert before QueryM2M Add")
 		return
 	}
-	m2m := orm.NewOrm().QueryM2M(m,"Nutritions")
+	m2m := orm.NewOrm().QueryM2M(m,"Ingredients")
 
-	for i,_ := range nurs {
-		m2m.Add(nurs[i])
+	for i,_ := range arr {
+		m2m.Add(arr[i])
 	}
 }
 

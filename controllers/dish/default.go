@@ -30,7 +30,7 @@ func (this *DishController) ObjectQs() orm.QuerySeter {
 func (this *DishController) GetForm() dish.DishForm {
 	form := dish.DishForm{}
 
-	form.ListNutritions() 
+	form.ListIngredients() 
 
 	return form
 }
@@ -47,7 +47,7 @@ func (this *DishController) Dish() {
 	models.ListObjects(qs,&dishes)
 
 	for _,p := range dishes {
-		p.LoadNutritions()
+		p.LoadIngredients()
 	}
 		
 	this.Data["Count"] = len(dishes)
@@ -76,8 +76,8 @@ func (this *DishController) DishAddPost() {
 	this.TplName = "dish/add.tpl"
 	form := dish.DishForm{}
 	
-	ids := this.GetStrings("NursSelect")
-	form.Nurs.Set(ids)
+	ids := this.GetStrings("IngredientsSelect")
+	form.Ingredients.Set(ids)
 	
 	if this.ValidFormSets(&form) == false {
 		beego.Error("DishAdd Form valid failed: ")
@@ -110,12 +110,12 @@ func (this *DishController) DishDelete() {
 		this.Abort("502")
 		return
 	}
+	dishMd.LoadIngredients()
 
-	dishMd.LoadNutritions()
-
+	
 	database.StartTrans()
 	
-	dishMd.RemoveNutritions()
+	dishMd.RemoveIngredients()
 	
 	if err := dishMd.Delete(); err == nil {
 
