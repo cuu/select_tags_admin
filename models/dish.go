@@ -19,6 +19,8 @@ type Dish struct {
 	EstimatePrice int
 	
 	Ingredients SliceIngredientPointers `orm:"rel(m2m)"`
+	Booked SliceMenuPointers `orm:"reverse(many);rel_table(menu_booked)"`
+	Extras SliceMenuPointers `orm:"reverse(many);rel_table(menu_extras)"`
 	Created  time.Time  `orm:"auto_now_add"`
 	Updated  time.Time  `orm:"auto_now"`
 }

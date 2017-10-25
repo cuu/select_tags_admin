@@ -3,7 +3,7 @@ package models
 import (
 	"time"
 	"strings"
-//	"github.com/astaxie/beego"
+	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 )
 
@@ -73,6 +73,42 @@ func (m *Menu) SetDishes( arr []Dish ) {
 	}
 }
 */
+
+func (m *Menu) SetExtras( arr []Dish) {
+	if m.Id == 0 {
+		beego.Error("We Should Insert before QueryM2M Add")
+		return
+	}
+
+	m2m := orm.NewOrm().QueryM2M(m,"Extras")
+	for i,_ := range arr {
+		m2m.Add(arr[i])
+	}
+	
+}
+
+func (m *Menu) LoadExtras() (int64,error) {
+	num,err := orm.NewOrm().LoadRelated(m,"Extras") 
+	return num,err
+}
+
+func (m *Menu) SetBooked( arr []Dish) {
+	if m.Id == 0 {
+		beego.Error("We Should Insert before QueryM2M Add")
+		return
+	}
+
+	m2m := orm.NewOrm().QueryM2M(m,"Booked")
+	for i,_ := range arr {
+		m2m.Add(arr[i])
+	}
+	
+}
+
+func (m *Menu) LoadBooked() (int64,error) {
+	num,err := orm.NewOrm().LoadRelated(m,"Booked")
+	return num,err
+}
 
 func Menus() orm.QuerySeter {
 	return orm.NewOrm().QueryTable("menu").OrderBy("-Id")

@@ -3,7 +3,7 @@ package menu
 
 import (
 //	"fmt"
-//	"github.com/astaxie/beego"
+	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	
 	. "github.com/cuu/select_tags/controllers"
@@ -43,6 +43,10 @@ func (this *MenuController) Menu() {
 
 	models.ListObjects(qs,&menus)
 
+	for _,p := range menus {
+		p.LoadExtras()
+		p.LoadBooked()
+	}
 	this.Data["Count"] = len(menus)
 	this.Data["Menus"] = menus
 
@@ -60,3 +64,29 @@ func (this *MenuController) MenuAdd() {
 
 }
 
+// @router /menu/add [post]
+func (this *MenuController) MenuAddPost() {
+	this.TplName = "menu/add.tpl"
+	form := this.GetForm()
+
+	ids := this.GetStrings("BookedSelect")
+	form.Booked.Set(ids)
+	ids = this.GetStrings("ExtrasSelect")
+	form.Extras.Set(ids)
+
+	if this.ValidFormSets(&form) == false {
+		beego.Error("MenuAdd Form Valid Failed: ")
+		this.Render()
+		return
+	}
+
+	menuMd := new(models.Menu)
+	if err := form.SaveMenu(menuMd); err == nil {
+		this.Redirect("/menu",302)
+		return
+	} else {
+		beego.Error("MenuAdd Failed: ",err)
+		this.Render()
+	}
+	
+}

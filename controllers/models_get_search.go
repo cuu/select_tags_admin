@@ -54,6 +54,8 @@ func (this *ModelsGetSearchController) ModelPickPost() {
 		qs = models.Nutritions()
 	case "Ingredient":
 		qs = models.Ingredients()
+	case "Dish":
+		qs = models.Dishes()
 	}
 
 	qs = qs.Filter("Id", id).Limit(1)
@@ -64,6 +66,8 @@ func (this *ModelsGetSearchController) ModelPickPost() {
 	case "Nutrition":
 		qs.ValuesList(&data,"Id","Name")
 	case "Ingredient":
+		qs.ValuesList(&data,"Id","Name")
+	case "Dish":
 		qs.ValuesList(&data,"Id","Name")
 	}
 	
@@ -101,5 +105,7 @@ func (this *ModelsGetSearchController) ModelSelectPost() {
 		models.Nutritions().Filter("Name__icontains", search).Limit(10).ValuesList(&data, "Id", "Name")
 	case "Ingredient":
 		models.Ingredients().Filter("Name__icontains", search).Limit(10).ValuesList(&data,"Id","Name")
+	case "Dish":
+		models.Dishes().Filter("Name__icontains",search).Limit(10).ValuesList(&data,"Id","Name")
 	}
 }

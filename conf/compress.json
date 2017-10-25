@@ -40,8 +40,9 @@
 								"SourceFiles":[
 										"nur/index.js",
 										"dish/index.js",
-										"ingredient/index.js"
-										
+										"ingredient/index.js",
+										"menu/index.js"
+									
 										
 								]
 						}
