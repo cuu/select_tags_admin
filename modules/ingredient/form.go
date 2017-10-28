@@ -6,8 +6,8 @@ import (
 
 //	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/validation"
-	"github.com/cuu/select_tags/models"
-	"github.com/cuu/select_tags/utils"
+	"github.com/cuu/select_tags_admin/models"
+	"github.com/cuu/select_tags_admin/utils"
 )
 
 	type IngredientForm struct {

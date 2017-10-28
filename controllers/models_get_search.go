@@ -17,7 +17,7 @@ package controllers
 import (
 	"github.com/astaxie/beego/orm"
 
-	"github.com/cuu/select_tags/models"
+	"github.com/cuu/select_tags_admin/models"
 )
 
 type ModelsGetSearchController struct {

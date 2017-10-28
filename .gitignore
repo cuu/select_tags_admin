@@ -1,3 +1,4 @@
 *.tmp
 *.swap
 select_tags
+select_tags_admin

@@ -5,8 +5,8 @@ import (
 	"strconv"
 //	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/validation"
-	"github.com/cuu/select_tags/models"
-	"github.com/cuu/select_tags/utils"
+	"github.com/cuu/select_tags_admin/models"
+	"github.com/cuu/select_tags_admin/utils"
 	
 )
 

@@ -16,6 +16,10 @@ type Dish struct {
 	Name string `orm:"size(255);unique"`
 	//	Nutritions []*Nutrition `orm:"rel(m2m)"`
 	//Nutritions  SliceNutritionPointers `orm:"rel(m2m);on_delete(set_null)"`
+	FirstClass  string
+	SecClass    string
+	ThirdClass  string
+	
 	EstimatePrice int
 	
 	Ingredients SliceIngredientPointers `orm:"rel(m2m)"`
@@ -57,8 +61,13 @@ func (m *Dish) Delete() error {
 func (m *Dish) RemoveIngredients() (int64,error) {
 	m2m := orm.NewOrm().QueryM2M(m,"Ingredients")
 
-	num,err := m2m.Remove(m.Ingredients)
-	return num,err
+	if len(m.Ingredients) > 0 {
+		num,err := m2m.Remove(m.Ingredients)
+		return num,err
+	}else {
+		return 0,nil
+	}
+	
 }
 
 func (m *Dish) LoadIngredients() (int64,error) {

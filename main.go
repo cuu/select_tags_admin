@@ -1,15 +1,15 @@
 package main
 
 import (
-	_ "github.com/cuu/select_tags/routers"
+	_ "github.com/cuu/select_tags_admin/routers"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
 	"github.com/astaxie/beego/logs"
 	"github.com/beego/compress"
 	
-  . "github.com/cuu/select_tags/controllers"
-	 "github.com/cuu/select_tags/database"
-	 "github.com/cuu/select_tags/utils"
+  . "github.com/cuu/select_tags_admin/controllers"
+	 "github.com/cuu/select_tags_admin/database"
+	 "github.com/cuu/select_tags_admin/utils"
 	"fmt"
 	"flag"
 	"errors"
@@ -19,7 +19,7 @@ import (
 )
 
 var (
-	BinaryName ="select_tags"
+	BinaryName ="select_tags_admin"
 	IsProMode bool
 	AppUrl string
 	CompressConfPath = "conf/compress.json"

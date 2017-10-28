@@ -6,7 +6,7 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 
-	"github.com/cuu/select_tags/utils"
+	"github.com/cuu/select_tags_admin/utils"
 	
 )
 

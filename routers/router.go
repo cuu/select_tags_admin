@@ -1,11 +1,11 @@
 package routers
 
 import (
-	"github.com/cuu/select_tags/controllers"
-	"github.com/cuu/select_tags/controllers/nur"
-	"github.com/cuu/select_tags/controllers/dish"
-	"github.com/cuu/select_tags/controllers/ingredient"
-	"github.com/cuu/select_tags/controllers/menu"
+	"github.com/cuu/select_tags_admin/controllers"
+	"github.com/cuu/select_tags_admin/controllers/nur"
+	"github.com/cuu/select_tags_admin/controllers/dish"
+	"github.com/cuu/select_tags_admin/controllers/ingredient"
+	"github.com/cuu/select_tags_admin/controllers/menu"
 	"github.com/astaxie/beego"
 )
 

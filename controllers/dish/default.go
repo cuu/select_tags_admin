@@ -5,11 +5,11 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	
-	. "github.com/cuu/select_tags/controllers"
-	"github.com/cuu/select_tags/models"
+	. "github.com/cuu/select_tags_admin/controllers"
+	"github.com/cuu/select_tags_admin/models"
 
-	"github.com/cuu/select_tags/modules/dish"
-	"github.com/cuu/select_tags/database"
+	"github.com/cuu/select_tags_admin/modules/dish"
+	"github.com/cuu/select_tags_admin/database"
 	
 )
 
@@ -103,6 +103,9 @@ func (this *DishController) DishDelete() {
 	if id > 0 {
 		qs := models.Dishes().Filter("Id",id)
 		qs.RelatedSel(1).One(&dishMd)
+	}else {
+		beego.Error("DishDelete Id error")
+		return
 	}
 
 
@@ -128,4 +131,79 @@ func (this *DishController) DishDelete() {
 		this.Data["Error"] = err
 		this.Render()
 	}
+}
+
+// @router /dish/edit/?:id [get]
+func (this *DishController) DishEdit() {
+	this.TplName = "dish/edit.tpl"
+	id,_ := this.GetInt(":id")
+
+	var dishMd = new(models.Dish)
+
+	if id > 0 {
+		qs := models.Dishes().Filter("Id",id)
+		qs.RelatedSel(1).One(dishMd)
+	}
+
+	dishMd.LoadIngredients()
+	
+	if dishMd.Id == 0 {
+		this.Abort("404")
+		return
+	}
+
+
+	form := dish.DishForm{DishMd:dishMd}
+	
+	form.SetFromDish(dishMd)
+	
+	this.SetFormSets(&form)
+	this.Data["Id"] = id
+	this.Render()
+	return
+	
+}
+
+// @router /dish/edit/?:id [post]
+func (this *DishController) DishEditPost() {
+	this.TplName = "dish/edit.tpl"
+	
+	id, _ := this.GetInt(":id")
+	var dishMd = new(models.Dish)
+	if id > 0 {
+		qs := models.Dishes().Filter("Id",id)
+		qs.RelatedSel(1).One(dishMd)
+	}else {
+		beego.Error("Id <= 0 ,error!")
+	}
+
+	dishMd.LoadIngredients()
+	
+	if dishMd.Id == 0 {
+		this.Abort("404")
+		return
+	}
+
+	form := dish.DishForm{DishMd:dishMd}
+	ids := this.GetStrings("IngredientsSelect")
+	form.Ingredients.Set(ids)
+	form.SetFromDish(dishMd)
+	
+	this.Data["Id"]  = id
+	if !this.ValidFormSets(&form) {
+		beego.Error("Update Dish Post error")
+		this.Render()
+		return
+	}
+
+	if err := form.UpdateDish(dishMd); err == nil {
+		this.JsStorage("deleteKey","dish/edit")
+		this.Redirect("/dish",302)
+	} else {
+		beego.Error("UpdateDish failed: ",err)
+		this.Render()
+	}
+
+	return
+	
 }

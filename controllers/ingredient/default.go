@@ -5,11 +5,11 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	
-	. "github.com/cuu/select_tags/controllers"
-	"github.com/cuu/select_tags/models"
+	. "github.com/cuu/select_tags_admin/controllers"
+	"github.com/cuu/select_tags_admin/models"
 
-	"github.com/cuu/select_tags/modules/ingredient"
-	"github.com/cuu/select_tags/database"
+	"github.com/cuu/select_tags_admin/modules/ingredient"
+	"github.com/cuu/select_tags_admin/database"
 	
 )
 

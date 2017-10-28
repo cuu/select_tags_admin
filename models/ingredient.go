@@ -7,6 +7,8 @@ import (
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
+
+	"github.com/cuu/select_tags_admin/utils"
 )
 
 type Ingredient struct {
@@ -55,8 +57,12 @@ func (m *Ingredient) String() string {
 func (m *Ingredient) RemoveNutritions() (int64,error) {
 	m2m := orm.NewOrm().QueryM2M(m,"Nutritions")
 
-	num,err := m2m.Remove(m.Nutritions)
-	return num,err
+	if len(m.Nutritions) > 0 {
+		num,err := m2m.Remove(m.Nutritions)
+		return num,err
+	}else {
+		return 0,nil
+	}
 }
 
 func (m *Ingredient) LoadNutritions() (int64,error) {
@@ -94,8 +100,21 @@ func (e SliceIngredientPointers) Label() []string {
 
 }
 
+func (e SliceIngredientPointers) Ids() []string {
+	var d []string
+	for _,p := range e {
+		d = append(d,utils.ToStr(p.Id) )
+	}
+	return d
+
+}
+
 func (e SliceIngredientPointers) String() string {
 	return strings.Join(e.Label(),",")
+}
+
+func (e SliceIngredientPointers) IdString() string {
+	return strings.Join(e.Ids(),",")
 }
 
 

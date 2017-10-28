@@ -22,7 +22,7 @@
 
 			{{ range .Menus }}
 			<tr>
-				<td> <div> {{.SpecifyDate }} </div> </td>
+				<td> <div> {{.SpecifyDate | datetime }} </div> </td>
 				<td>
 					<div>
 								{{with .Booked }}

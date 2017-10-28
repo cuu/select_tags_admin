@@ -7,7 +7,7 @@ import (
 
 func init() {
 
-	beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers/ingredient:IngredientController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers/ingredient:IngredientController"],
+	beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers/ingredient:IngredientController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers/ingredient:IngredientController"],
 		beego.ControllerComments{
 			Method: "Ingredient",
 			Router: `/ingredient`,
@@ -15,7 +15,7 @@ func init() {
 			MethodParams: param.Make(),
 			Params: nil})
 
-	beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers/ingredient:IngredientController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers/ingredient:IngredientController"],
+	beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers/ingredient:IngredientController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers/ingredient:IngredientController"],
 		beego.ControllerComments{
 			Method: "IngredientAdd",
 			Router: `/ingredient/add`,
@@ -23,7 +23,7 @@ func init() {
 			MethodParams: param.Make(),
 			Params: nil})
 
-	beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers/ingredient:IngredientController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers/ingredient:IngredientController"],
+	beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers/ingredient:IngredientController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers/ingredient:IngredientController"],
 		beego.ControllerComments{
 			Method: "IngredientAddPost",
 			Router: `/ingredient/add`,
@@ -31,7 +31,7 @@ func init() {
 			MethodParams: param.Make(),
 			Params: nil})
 
-	beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers/ingredient:IngredientController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers/ingredient:IngredientController"],
+	beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers/ingredient:IngredientController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers/ingredient:IngredientController"],
 		beego.ControllerComments{
 			Method: "IngredientDelete",
 			Router: `/ingredient/delete/?:id`,

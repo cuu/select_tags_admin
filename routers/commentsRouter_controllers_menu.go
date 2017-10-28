@@ -7,7 +7,7 @@ import (
 
 func init() {
 
-	beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers/menu:MenuController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers/menu:MenuController"],
+	beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers/menu:MenuController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers/menu:MenuController"],
 		beego.ControllerComments{
 			Method: "Menu",
 			Router: `/menu`,
@@ -15,7 +15,7 @@ func init() {
 			MethodParams: param.Make(),
 			Params: nil})
 
-	beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers/menu:MenuController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers/menu:MenuController"],
+	beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers/menu:MenuController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers/menu:MenuController"],
 		beego.ControllerComments{
 			Method: "MenuAdd",
 			Router: `/menu/add`,
@@ -23,7 +23,7 @@ func init() {
 			MethodParams: param.Make(),
 			Params: nil})
 
-	beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers/menu:MenuController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers/menu:MenuController"],
+	beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers/menu:MenuController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers/menu:MenuController"],
 		beego.ControllerComments{
 			Method: "MenuAddPost",
 			Router: `/menu/add`,

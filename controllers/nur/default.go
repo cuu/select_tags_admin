@@ -6,11 +6,11 @@ import (
 	
 	"github.com/astaxie/beego"
 //  "github.com/astaxie/beego/orm"
-	. "github.com/cuu/select_tags/controllers"
-//rdb "github.com/cuu/select_tags/database"
+	. "github.com/cuu/select_tags_admin/controllers"
+//rdb "github.com/cuu/select_tags_admin/database"
 	
-	"github.com/cuu/select_tags/models"
-	"github.com/cuu/select_tags/modules/nur"
+	"github.com/cuu/select_tags_admin/models"
+	"github.com/cuu/select_tags_admin/modules/nur"
 
 	
 	

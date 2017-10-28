@@ -7,7 +7,7 @@ import (
 
 func init() {
 
-	beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers:MainController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers:MainController"],
+	beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers:MainController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers:MainController"],
 		beego.ControllerComments{
 			Method: "Index",
 			Router: `/`,
@@ -15,7 +15,7 @@ func init() {
 			MethodParams: param.Make(),
 			Params: nil})
 
-	beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers:MainController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers:MainController"],
+	beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers:MainController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers:MainController"],
 		beego.ControllerComments{
 			Method: "IndexPost",
 			Router: `/`,
@@ -23,7 +23,7 @@ func init() {
 			MethodParams: param.Make(),
 			Params: nil})
 
-	beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers:ModelsGetSearchController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers:ModelsGetSearchController"],
+	beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers:ModelsGetSearchController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers:ModelsGetSearchController"],
 		beego.ControllerComments{
 			Method: "ModelPickPost",
 			Router: `/model/pick`,
@@ -31,7 +31,7 @@ func init() {
 			MethodParams: param.Make(),
 			Params: nil})
 
-	beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers:ModelsGetSearchController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags/controllers:ModelsGetSearchController"],
+	beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers:ModelsGetSearchController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers:ModelsGetSearchController"],
 		beego.ControllerComments{
 			Method: "ModelSelectPost",
 			Router: `/model/select`,
