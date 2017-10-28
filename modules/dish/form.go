@@ -54,10 +54,11 @@ func (form *DishForm) FirstClassSelectData() [][]string {
 
 func (form *DishForm) IngredientsSelectSelectData() [][]string {
 	data := make([][]string,0)
-	for _,n := range form.DishMd.Ingredients {
-		data = append(data,[]string{n.Name,utils.ToStr(n.Id)} )
+	if form.DishMd != nil {
+		for _,n := range form.DishMd.Ingredients {
+			data = append(data,[]string{n.Name,utils.ToStr(n.Id)} )
+		}
 	}
-
 	return data
 }
 

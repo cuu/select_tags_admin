@@ -15,6 +15,7 @@
 			 <table border="1">
 			 <tr>
 				<th> Name </th>
+				<th> First Class </th>
 				<th> Ingredients </th>
 				<th> Operation</th>
 			</tr>
@@ -22,6 +23,7 @@
 			{{ range .Dishes }}
 			<tr>
 				<td> <div> {{.Name }} </div> </td>
+				<td> <div> {{.FirstClass }}</div></td>
 				<td>
 					<div>
 								{{with .Ingredients }}
