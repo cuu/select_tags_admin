@@ -23,6 +23,7 @@ var (
 	IsProMode bool
 	AppUrl string
 	CompressConfPath = "conf/compress.json"
+	CompressJQueryUploadConfPath ="conf/compress_jquery_upload.conf"
 )
 
 
@@ -68,7 +69,7 @@ func GuuRecoverPanic(ctx *context.Context) {
 
 
 func settingCompress() {
-	  setting, err := compress.LoadJsonConf(CompressConfPath, IsProMode, AppUrl)
+	setting, err := compress.LoadJsonConf(CompressConfPath, IsProMode, AppUrl)
   if err != nil {
     beego.Error(err)
     return
@@ -82,6 +83,24 @@ func settingCompress() {
 
   beego.AddFuncMap("compress_js", setting.Js.CompressJs)
   beego.AddFuncMap("compress_css", setting.Css.CompressCss)
+
+	//---------------------------------------------------------------------------------------
+	setting, err = compress.LoadJsonConf(CompressJQueryUploadConfPath, IsProMode, AppUrl)
+  if err != nil {
+    beego.Error(err)
+    return
+  }
+
+  setting.RunCommand()
+
+  if IsProMode {
+    setting.RunCompress(true, false, true)
+  }
+
+  beego.AddFuncMap("compress_jqueryupload_js", setting.Js.CompressJs)
+  beego.AddFuncMap("compress_jqueryupload_css", setting.Css.CompressCss)
+
+	
 }
 
 

@@ -78,6 +78,9 @@
     </div>
 
 		<div>
+			<div> <a href="http://127.0.0.1:8081">Front Page</a></div>
+			<hr />
+			<br />
 			<ul>
 				<li><a href="/menu"> Menus </a></li>
 				<li><a href="/dish"> Dishes </a></li>

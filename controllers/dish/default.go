@@ -1,7 +1,8 @@
 package dish
 
 import (
-//	"fmt"
+//		"fmt"
+	"io/ioutil"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	
@@ -63,8 +64,12 @@ func (this *DishController) DishAdd() {
 
 	this.TplName = "dish/add.tpl"
 	form := this.GetForm()
-	
 
+	// for blueimg template <script> inner content conflicted with golang template Execute
+	dat,_ := ioutil.ReadFile("views/dish/template-download.js")
+	this.Data["template_download"] = string(dat)
+	dat,_ = ioutil.ReadFile("views/dish/template-upload.js")
+	this.Data["template_upload"]  = string(dat)
 	
 	this.SetFormSets(&form)
 	this.Render()
