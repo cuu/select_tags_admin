@@ -39,7 +39,7 @@
 <div class="row">
 		 <div id="content">
 
-<form id="fileupload" method="POST" action="/dish/add" enctype="multipart/form-data">
+<form id="fileupload" method="POST" action="/pts" enctype="multipart/form-data">
 {{ .xsrf_html }} {{ .once_html }}
 
 {{template "form/fields.html"  .DishFormSets}}
@@ -53,7 +53,7 @@
                 <!-- The fileinput-button span is used to style the file input field as button -->
                 <span class="btn btn-success fileinput-button">
                     <i class="glyphicon glyphicon-plus"></i>
-                    <span>Add files...</span>
+                    <span>添加文件</span>
                     <input type="file" name="files[]" multiple>
                 </span>
                 <button type="submit" class="btn btn-primary start">
@@ -88,7 +88,7 @@
 
 
 
-<button class="btn btn-primary"> Add <i class="icon-chevron-sign-right"></i></button>
+<button class="btn btn-primary"> 添加  <i class="icon-chevron-sign-right"></i></button>
 
 </form>
 

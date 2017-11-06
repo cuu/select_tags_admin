@@ -14,6 +14,7 @@ func init() {
 
 	beego.Include( &controllers.ModelsGetSearchController{})
 	beego.Include( &controllers.ServerPHPController{})
+	beego.Include( &controllers.PtsController{})
 	
 	beego.Include( &nur.NurController{} ) //quote router
 	beego.Include( &dish.DishController{} )

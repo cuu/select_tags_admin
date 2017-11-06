@@ -39,6 +39,22 @@ func init() {
 			MethodParams: param.Make(),
 			Params: nil})
 
+	beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers:PtsController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers:PtsController"],
+		beego.ControllerComments{
+			Method: "Pts",
+			Router: `/pts`,
+			AllowHTTPMethods: []string{"get"},
+			MethodParams: param.Make(),
+			Params: nil})
+
+	beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers:PtsController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers:PtsController"],
+		beego.ControllerComments{
+			Method: "PtsPost",
+			Router: `/pts`,
+			AllowHTTPMethods: []string{"post"},
+			MethodParams: param.Make(),
+			Params: nil})
+
 	beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers:ServerPHPController"] = append(beego.GlobalControllerRouter["github.com/cuu/select_tags_admin/controllers:ServerPHPController"],
 		beego.ControllerComments{
 			Method: "ServerPhp",

@@ -13,12 +13,54 @@
 
 $(function () {
     'use strict';
-
+		var hash = {};
+		var server_url_base="http://localhost:9073";
+		
+		function refresh_filelist(){
+		$("#fileupload .up_file").remove();
+						$.each(hash,function(idx,h) {
+								if (h == true)
+										$('#fileupload').append('<input class="up_file" type="text" name="fileName" value="'+idx.replace("delete","image")+'"  readonly/>');
+						});				
+		}
     // Initialize the jQuery File Upload widget:
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
-        //xhrFields: {withCredentials: true},
-        url: '/server/php/'
+        xhrFields: {withCredentials: true},
+        url: server_url_base+'/files',
+				// Enable file resume
+				// Chunk size in bytes
+				maxNumberOfFiles: 6,
+				autoUpload:false,
+				maxChunkSize: 1000000,
+				acceptFileTypes: /(\.|\/)(jpe?g|png)$/i,
+				change : function (e, data) {
+						if(data.files.length >= 6){
+								alert("Max 6 files are allowed")
+								return false;
+						}
+				},
+				add: function (e, data) {
+						var that = this;
+						$.ajax({
+								url: server_url_base+'/resume',
+								xhrFields: {withCredentials: true},
+								data: {file: data.files[0].name}
+						}).done(function(result) {
+								var file = result.file;
+								data.uploadedBytes = file && file.size;
+								$.blueimp.fileupload.prototype.options.add.call(that, e, data);
+						});
+				},
+				success:function(result,textStatus,jqXHR){
+						
+						//console.log(result);
+						$.each(result.files,function(index,file) {
+								hash[file.deleteUrl] = true
+						});
+						refresh_filelist();
+						
+				}
     });
 
     // Enable iframe cross-domain access via redirect option:
@@ -67,9 +109,45 @@ $(function () {
         }).always(function () {
             $(this).removeClass('fileupload-processing');
         }).done(function (result) {
+						console.log(result);
             $(this).fileupload('option', 'done')
                 .call(this, $.Event('done'), {result: result});
         });
     }
 
+		
+		$('#fileupload').on("fileuploaddone", function (e, data) {
+				/*
+				$.each(data.files, function (index, file) {
+						console.log(file);
+				});
+				*/
+		});
+
+		$('#fileupload').on("fileuploadcompleted", function (e, data) {
+				/*
+				$.each(data.files, function (index, file) {
+						console.log(file);
+				});
+				*/
+				
+		});
+		
+		$("#fileupload").on("fileuploadadd",function(e,data) {
+				/*
+				console.log("fileuploadadd: ");
+				console.log(data.files);
+				console.log( $("#fileupload").serializeArray() );
+				*/
+		});
+		
+		$("#fileupload").on("fileuploaddestroyed",function(e,data) {
+				
+			
+			
+				hash[data.url]=false;
+				refresh_filelist();
+			
+		});
+		
 });
