@@ -104,6 +104,13 @@ func (form *DishForm) SaveDish(m *models.Dish) error {
 	m.FirstClass = form.FirstClass
 	m.SecClass   = form.SecClass
 	m.ThirdClass = form.ThirdClass
+
+	m.Image1     = form.Image1
+	m.Image2     = form.Image2
+	m.Image3     = form.Image3
+	m.Image4     = form.Image4
+	m.Image5     = form.Image5
+	m.Image6     = form.Image6
 	
 	err := m.Insert()
 	if err == nil {

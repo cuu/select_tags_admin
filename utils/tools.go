@@ -29,10 +29,24 @@ import (
 	"reflect"
 	"strconv"
 	"time"
-
+	"strings"
+	
 	"github.com/astaxie/beego"
 
 )
+
+func ThumbnailURL(url string) string {
+  parts := strings.Split(url,"/")
+  
+  file := parts[len(parts) -1 ]
+  parts2 := strings.Split(file,".")
+  if len(parts2) == 2 { 
+    thumbnail :=  parts2[0] + "-thumbnail."+parts2[1]
+    return strings.Replace(url,file,thumbnail, -1) 
+  }else {
+    return url 
+  }
+}
 
 func NumberEncode(number string, alphabet []byte) string {
 	token := make([]byte, 0, 12)

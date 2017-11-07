@@ -35,7 +35,7 @@
 <div class="row">
 		 <div id="content">
 
-<form id="fileupload" method="POST" action="/pts" enctype="multipart/form-data">
+<form id="fileupload" method="POST" action="/dish/add" enctype="multipart/form-data">
 {{ .xsrf_html }} {{ .once_html }}
 
 {{template "form/fields.html"  .DishFormSets}}

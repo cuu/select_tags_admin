@@ -14,6 +14,7 @@
 
 			 <table border="1">
 			 <tr>
+				<th>Avatar</th>
 				<th> Name </th>
 				<th> First Class </th>
 				<th> Ingredients </th>
@@ -22,6 +23,7 @@
 
 			{{ range .Dishes }}
 			<tr>
+				<td><div><img src="{{.Image1 | ThumbnailURL }}" />  </div></td>
 				<td> <div> {{.Name }} </div> </td>
 				<td> <div> {{.FirstClass }}</div></td>
 				<td>

@@ -133,6 +133,7 @@ func before_run_beego() {
 
 	beego.ErrorController(&ErrorController{})
 
+	beego.AddFuncMap("ThumbnailURL",utils.ThumbnailURL)
 	
 }
 
