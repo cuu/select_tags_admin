@@ -4,26 +4,23 @@
 <head>
   <title>Beego</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, max    imum-scale=1.0, user-scalable=no">
+	
   <style type="text/css">
     *,body {
-      margin: 0px;
-      padding: 0px;
     }
 
     body {
-      margin: 0px;
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 14px;
       line-height: 20px;
       background-color: #fff;
     }
 
     header,
     footer {
-      width: 960px;
-      margin-left: auto;
-      margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
+		marign:10px;
     }
 
     header {
@@ -52,21 +49,26 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      box-shadow: inset 0px 0px 100px #ddd;
       z-index: -1;
       top: 0px;
       left: 0px;
     }
+		ul.list{
+		list-style:none;
+		}
+		ul.list li {
+		cursor:pointer;
+		marign-top:10px;
+		margin-bottom:10px;
+		font-size:26px;
+		
+		}
   </style>
 </head>
 
 <body>
   <header>
-		{{ if .InPost }} 
-    <h1 class="logo">Welcome to Beego Post Data Test Page</h1>
-		{{else }}
-		<h1 class="logo">Welcome to Beego</h1>
-		{{end}}
+		<h1 class="logo">Welcome</h1>
 		
     <div class="description">
 		<div>
@@ -81,7 +83,7 @@
 			<div> <a href="http://127.0.0.1:8081">Front Page</a></div>
 			<hr />
 			<br />
-			<ul>
+			<ul class="list">
 				<li><a href="/menu"> Menus </a></li>
 				<li><a href="/dish"> Dishes </a></li>
 				<li><a href="/ingredient">  Ingredients </a></li>
