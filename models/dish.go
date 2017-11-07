@@ -26,6 +26,13 @@ type Dish struct {
 	Booked SliceMenuPointers `orm:"reverse(many);rel_table(menu_booked)"`
 	Extras SliceMenuPointers `orm:"reverse(many);rel_table(menu_extras)"`
 	Images SliceImagePointers `orm:"rel(m2m);rel_table(dish_img)"`
+
+	Image1 string
+	Image2 string
+	Image3 string
+	Image4 string
+	Image5 string
+	Image6 string
 	
 	Created  time.Time  `orm:"auto_now_add"`
 	Updated  time.Time  `orm:"auto_now"`

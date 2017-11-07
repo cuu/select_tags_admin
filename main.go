@@ -24,6 +24,7 @@ var (
 	AppUrl string
 	CompressConfPath = "conf/compress.json"
 	CompressJQueryUploadConfPath ="conf/compress_jquery_upload.conf"
+	CompressBlueimpPath = "conf/compress_blueimp.conf"
 )
 
 
@@ -100,6 +101,21 @@ func settingCompress() {
   beego.AddFuncMap("compress_jqueryupload_js", setting.Js.CompressJs)
   beego.AddFuncMap("compress_jqueryupload_css", setting.Css.CompressCss)
 
+	//---------------------------------------------------------------------------------------
+	setting, err = compress.LoadJsonConf(CompressBlueimpPath, IsProMode, AppUrl)
+  if err != nil {
+    beego.Error(err)
+    return
+  }
+
+  setting.RunCommand()
+
+  if IsProMode {
+    setting.RunCompress(true, false, true)
+  }
+
+  beego.AddFuncMap("compress_blueimp_js", setting.Js.CompressJs)
+  beego.AddFuncMap("compress_blueimp_css", setting.Css.CompressCss)
 	
 }
 

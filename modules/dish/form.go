@@ -28,6 +28,13 @@ type DishForm struct {
 
 	Ingredients models.SliceIngredientField `form:"-"`
 
+	Image1 string  `form:"attr(readonly,readonly)" valid:""`
+	Image2 string  `form:"attr(readonly,readonly)" valid:""`
+	Image3 string  `form:"attr(readonly,readonly)" valid:""`
+	Image4 string  `form:"attr(readonly,readonly)" valid:""`
+	Image5 string  `form:"attr(readonly,readonly)" valid:""`
+	Image6 string  `form:"attr(readonly,readonly)" valid:""`
+	
 	DishMd  *models.Dish `form:"-"`
 }
 

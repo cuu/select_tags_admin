@@ -13,16 +13,9 @@
 {{compress_js  "user"}}
 
 
-<!-- BlueImp -->
-<!-- The Templates plugin is included to render the upload/download listings -->
-<script src="//blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
-<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-<script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
-<!-- The Canvas to Blob plugin is included for image resizing functionality -->
-<script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
-<!-- blueimp Gallery script -->
-<script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
-<link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+{{compress_blueimp_js "lib"}}
+{{compress_blueimp_css "lib"}}
+
 
 {{compress_jqueryupload_css "lib"}}
 {{compress_jqueryupload_js "lib"}}
@@ -31,6 +24,9 @@
 <!-- CSS adjustments for browsers with JavaScript disabled -->
 <noscript><link rel="stylesheet" href="static/thirdpart/jquery-file-upload/css/jquery.fileupload-noscript.css"></noscript>
 <noscript><link rel="stylesheet" href="static/thirdpart/jquery-file-upload/css/jquery.fileupload-ui-noscript.css"></noscript>
+
+
+{{assets_js "/static/js/dish/main.js"}}
 
 </head>
 
