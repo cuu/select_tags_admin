@@ -9,7 +9,8 @@ import (
 	
   . "github.com/cuu/select_tags_admin/controllers"
 	 "github.com/cuu/select_tags_admin/database"
-	 "github.com/cuu/select_tags_admin/utils"
+	"github.com/cuu/select_tags_admin/utils"
+	"os"
 	"fmt"
 	"flag"
 	"errors"
@@ -22,6 +23,7 @@ var (
 	BinaryName ="select_tags_admin"
 	IsProMode bool
 	AppUrl string
+	TimeZone = "Asia/Shanghai"
 	CompressConfPath = "conf/compress.json"
 	CompressJQueryUploadConfPath ="conf/compress_jquery_upload.conf"
 	CompressBlueimpPath = "conf/compress_blueimp.conf"
@@ -134,6 +136,13 @@ func before_run_beego() {
 	beego.ErrorController(&ErrorController{})
 
 	beego.AddFuncMap("ThumbnailURL",utils.ThumbnailURL)
+
+	if _, err := time.LoadLocation(TimeZone); err == nil {
+		os.Setenv("TZ", TimeZone)
+	}else {
+		fmt.Println("Wrong time_zone: " + TimeZone + " " + err.Error())
+		os.Exit(2)
+	}
 	
 }
 

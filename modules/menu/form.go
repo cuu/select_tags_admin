@@ -72,7 +72,9 @@ func (form *MenuForm) SetFromMenu(m *models.Menu)  {
 
 func (form *MenuForm) UpdateMenu(m *models.Menu) error {
 	changes := utils.FormChanges(m,form)
+	
 	utils.SetFormValues(form,m)
+
 
 	database.StartTrans()
 	m.RemoveBooked()
