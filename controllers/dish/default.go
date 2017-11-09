@@ -196,7 +196,7 @@ func (this *DishController) DishEditPost() {
 	
 	this.Data["Id"]  = id
 	if !this.ValidFormSets(&form) {
-		beego.Error("Update Dish Post error")
+		beego.Error("Update Dish Post Valid error")
 		this.Render()
 		return
 	}

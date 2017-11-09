@@ -1,25 +1,24 @@
 {{ template "head.html" .}}
 <body>
-	<div id="main" class="container">
-			 <h1>{{.Title }} </h1>
+	<div id="main" class="container">	
 
-			 <a href="/" >Home</a> <br />
-
-			 {{.Count}}
-
-			 <br />
-			 <button onclick="menu_add()" > Create a menu </button>
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="/">Home</a>
+  <a class="breadcrumb-item" href="#" onclick="menu_add()">Create a Menu</a>
+  <span class="breadcrumb-item active">{{.Title}}</span>
+</nav>
 
 
-
-			 <table border="1">
+			 <table class="table">
+			 <thead class="thead-default">
 			 <tr>
 				<th> Date </th>
 				<th> Booked </th>
 				<th> Extras </th>
 				<th> Operations </th>
 			</tr>
-
+			</thead>
+			<tbody>
 			{{ range .Menus }}
 			<tr>
 				<td> <div> {{.SpecifyDate | datetime }} </div> </td>
@@ -41,6 +40,7 @@
 			</tr>
 
 			{{end}}
+			</tbody>
 			</table>
 
 </div>

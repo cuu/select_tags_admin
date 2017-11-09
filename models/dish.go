@@ -8,6 +8,7 @@ import (
 	
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
+	"github.com/cuu/select_tags_admin/utils"
 )
 
 // a dish like a dish of food
@@ -110,6 +111,16 @@ func (e SliceDishPointers) Label() []string {
 	for _,p := range e {
 		d = append(d,p.Name)
 	}
+	return d
+}
+
+func (e SliceDishPointers) Ids() []string {
+	var d []string
+	for _,p := range e {
+		d = append(d,utils.ToStr(p.Id))
+		
+	}
+
 	return d
 }
 

@@ -1,24 +1,21 @@
 {{ template "head.html" .}}
 <body>
 	<div id="main" class="container">
-			 <h1>{{.Title }} </h1>
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="/">Home</a>
+  <a class="breadcrumb-item" href="#" onclick="ingredient_add()">Add Ingredient</a>
+  <span class="breadcrumb-item active">{{.Title}}</span>
+</nav>
 
-			 <a href="/" >Home</a> <br />
-
-			 {{.Count}}
-
-			 <br />
-			 <button onclick="ingredient_add()" > Add ingredient</button>
-
-
-
-			 <table border="1">
+			 <table class="table">
+			 <thead class="thead-default">
 			 <tr>
 				<th> Name </th>
 				<th> Nutritions </th>
 				<th> Operation</th>
 			</tr>
-
+			</thead>
+			<tbody>
 			{{ range .Ingredients }}
 			<tr>
 				<td> <div> {{.Name }} </div> </td>
@@ -33,6 +30,7 @@
 			</tr>
 
 			{{end}}
+			</tbody>
 			</table>
 
 </div>

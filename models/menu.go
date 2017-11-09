@@ -87,6 +87,16 @@ func (m *Menu) SetExtras( arr []Dish) {
 	
 }
 
+func (m *Menu) RemoveExtras() (int64,error) {
+	m2m := orm.NewOrm().QueryM2M(m,"Extras")
+	if len(m.Extras) > 0 {
+		num,err :=m2m.Remove(m.Extras)
+		return num,err
+	}else {
+		return 0,nil
+	}
+}
+
 func (m *Menu) LoadExtras() (int64,error) {
 	num,err := orm.NewOrm().LoadRelated(m,"Extras") 
 	return num,err
@@ -104,6 +114,17 @@ func (m *Menu) SetBooked( arr []Dish) {
 	}
 	
 }
+
+func (m *Menu) RemoveBooked() (int64,error) {
+	m2m := orm.NewOrm().QueryM2M(m,"Booked")
+	if len(m.Booked) > 0 {
+		num,err := m2m.Remove(m.Booked)
+		return num,err
+	} else {
+		return 0,nil
+	}
+}
+
 
 func (m *Menu) LoadBooked() (int64,error) {
 	num,err := orm.NewOrm().LoadRelated(m,"Booked")

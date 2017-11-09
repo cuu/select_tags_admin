@@ -1,26 +1,24 @@
 {{ template "head.html" .}}
 <body>
 	<div id="main" class="container">
-			 <h1>{{.Title }} </h1>
 
-			 <a href="/" >Home</a> <br />
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="/">Home</a>
+  <a class="breadcrumb-item" href="#" onclick="dish_add()">Create a Dish</a>
+  <span class="breadcrumb-item active">{{.Title}}</span>
+</nav>
 
-			 {{.Count}}
-
-			 <br />
-			 <button onclick="dish_add()" > Add dish </button>
-
-
-
-			 <table border="1">
-			 <tr>
-				<th>Avatar</th>
-				<th> Name </th>
-				<th> First Class </th>
-				<th> Ingredients </th>
-				<th> Operation</th>
-			</tr>
-
+			 <table class="table">
+			 <thead class="thead-default">
+			 		<tr>	
+						 	<th>Avatar</th>
+							<th> Name </th>
+      				<th> First Class </th>
+			      	<th> Ingredients </th>
+     			  	<th> Operation</th>
+		    	</tr>
+				</thead>
+				<tbody>
 			{{ range .Dishes }}
 			<tr>
 				<td><div><img src="{{.Image1 | ThumbnailURL }}" />  </div></td>
@@ -37,6 +35,8 @@
 			</tr>
 
 			{{end}}
+			
+			</tbody>
 			</table>
 
 </div>

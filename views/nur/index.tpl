@@ -1,24 +1,22 @@
 {{ template "head.html" .}}
+<body>
+<div id="main" class="container">
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="/">Home</a>
+  <a class="breadcrumb-item" href="#" onclick="add_nur()">Add Ingredient</a>
+  <span class="breadcrumb-item active">{{.Title}}</span>
+</nav>
 
-<h1>{{.Title }} </h1>
-
-<a href="/" >Home</a> <br />
-
-{{.Count}}
-
-<br />
-<button onclick="add_nur()" > Add Nurition </button>
-
-
-
-<table border="1">
+<table class="table">
+<thead class="thead-default">
 <tr>
 <th> Name </th>
 <th> Everyday Dosage </th>
 <th> Indication </th>
 <th> Operation</th>
 </tr>
-
+</thead>
+<tbody>
 {{ range .Nurs }}
 <tr>
 <td> <div> {{.Name }} </div> </td>
@@ -28,6 +26,7 @@
 </tr>
 
 {{end}}
+</tbody>
 </table>
 
 {{template "foot.html" . }}

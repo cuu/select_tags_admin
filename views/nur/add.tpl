@@ -1,5 +1,8 @@
 {{ template "head.html" . }}
 
+<div id="main" class="container">
+<div class="row">
+		 <div id="content">
 
 
 <form method="POST" action="/nur/add">
@@ -11,5 +14,7 @@
 
 </form>
 
-
+		</div>
+</div>
+</div>
 {{ template "foot.html" . }}
